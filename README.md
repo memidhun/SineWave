@@ -1,4 +1,4 @@
-# Vacant Home Management System
+# Sentinel: Autonomous AI-Powered Home Management System
 
 This project is an *IoT and AI-based home automation system* for vacant homes. It uses *ROS 2* for capturing camera feeds, *Intel OneAPI* for intruder and pet detection, and Arduino for monitoring sensors like temperature, humidity, and controlling devices like fans and feeders.
 
