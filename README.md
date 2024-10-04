@@ -12,7 +12,7 @@ Sentinel is an AI-driven vacant home management system that utilizes IoT sensors
 - **Real-Time Notifications:** Receive instant updates on your home’s status through notifications.
 
 <div align="center">
-    <img src="https://github.com/memidhun/SineWave/blob/eb054f7430d29ed948c17a4fc18ba4b141e46b9c/App%20Images/Screenshot%202024-10-04%20235112.png" alt="Feature Example" />
+    <img src="https://github.com/memidhun/SineWave/blob/277de0f30e36b6d1953a6ef9fb438b34f4eb8d9d/App%20Images/Collab.png" alt="Feature Example" />
 </div>
 
 ## Installation
