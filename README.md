@@ -48,5 +48,5 @@ Once the system is running, it will begin monitoring your home environment and a
 ## Contributors
 - [Midhun Mathew](https://github.com/memidhun)
 - [Sidharth V Menon](https://github.com/VMOnGit)
-- [Rohan Binu](https://github.com/Grim-1)
+- [Rohan Binu Abraham](https://github.com/Grim-1)
 - [Nobin Jo Jaime Jose](https://github.com/NobinJo431)
