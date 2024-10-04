@@ -45,7 +45,7 @@ Once the system is running, it will begin monitoring your home environment and a
 - Integration with voice assistants for hands-free control.
 
 ## Contributors
-- [Midhun Mathew](https://github.com/your-username)
-- [Sidharth V Menon](https://github.com/team-member-1)
-- [Rohan Binu](https://github.com/team-member-2)
-- [Nobin Jo Jaime Jose](https://github.com/team-member-2)
+- [Midhun Mathew](https://github.com/memidhun)
+- [Sidharth V Menon](https://github.com/VMOnGit)
+- [Rohan Binu](https://github.com/Grim-1)
+- [Nobin Jo Jaime Jose](https://github.com/NobinJo431)
