@@ -1,4 +1,4 @@
-# Sentinel: AI-Powered Vacant Home Management
+# Sentinel: AI-Powered Vacant Home Management System
 
 ![Banner](https://github.com/memidhun/SineWave/blob/782b734ec367fb1916d9d1ba8f7102134efb7422/App%20Images/image.png)
 
