@@ -1,9 +1,9 @@
-# Sentinel: AI-Powered Smart Home Management
+# Sentinel: AI-Powered Vacant Home Management
 
 ![Banner](https://github.com/memidhun/SineWave/blob/782b734ec367fb1916d9d1ba8f7102134efb7422/App%20Images/image.png)
 
 ## Description
-Sentinel is an AI-driven smart home management system that utilizes IoT sensors to monitor environmental conditions such as temperature, humidity, and motion. The system automates tasks like appliance control and pet care, providing efficient management solutions for modern homes.
+Sentinel is an AI-driven vacant home management system that utilizes IoT sensors to monitor environmental conditions such as temperature, humidity, and motion. The system automates tasks like appliance control and pet care, providing efficient management solutions for modern homes.
 
 ## Features
 - **Real-Time Monitoring:** Continuously track temperature, humidity, and motion in your home.
