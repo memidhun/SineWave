@@ -1,21 +1,51 @@
-# Sentinel: Autonomous AI-Powered Home Management System
+# Sentinel: AI-Powered Smart Home Management
 
-This project is an *IoT and AI-based home automation system* for vacant homes. It uses *ROS 2* for capturing camera feeds, *Intel OneAPI* for intruder and pet detection, and Arduino for monitoring sensors like temperature, humidity, and controlling devices like fans and feeders.
+![Banner](https://github.com/memidhun/SineWave/blob/782b734ec367fb1916d9d1ba8f7102134efb7422/App%20Images/image.png)
+
+## Description
+Sentinel is an AI-driven smart home management system that utilizes IoT sensors to monitor environmental conditions such as temperature, humidity, and motion. The system automates tasks like appliance control and pet care, providing efficient management solutions for modern homes.
 
 ## Features
+- **Real-Time Monitoring:** Continuously track temperature, humidity, and motion in your home.
+- **Smart Automation:** Automate everyday tasks such as turning appliances on/off and managing pet care.
+- **AI-Driven Decision Making:** Leverage AI algorithms for intelligent actions without user intervention.
+- **Real-Time Notifications:** Receive instant updates on your home’s status through notifications.
 
-- *Intruder Detection*: Uses AI to monitor camera feeds and alert for intruders.
-- *Pet Feeding Automation*: Automatically feeds pets based on detection or schedule.
-- *IoT Sensors*: Monitors temperature, humidity, and environmental conditions.
+<div align="center">
+    <img src="path-to-feature-example-image" alt="Feature Example" />
+</div>
 
-## Tech Stack
+## Installation
+Follow these steps to set up the project:
 
-- *ROS 2* for camera and sensor data handling.
-- *Intel OneAPI* for real-time AI processing.
-- *Arduino* for IoT device control.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/sentinel.git
+   ```
+2. Navigate into the project directory:
+   ```bash
+   cd sentinel
+   ```
+3. Install required dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. Run the project:
+   ```bash
+   python main.py
+   ```
 
 ## Usage
+Once the system is running, it will begin monitoring your home environment and automating tasks based on real-time conditions. You can interact with the system through the user interface or the provided API.
 
-1. Start the ROS 2 camera node for capturing images.
-2. Run AI detection using Intel OneAPI for intruders and pets.
-3. Monitor sensors and control devices via Arduino.
+
+## Future Enhancements
+- Additional sensor integrations for more comprehensive monitoring.
+- Enhanced AI algorithms for improved decision-making.
+- Integration with voice assistants for hands-free control.
+
+## Contributors
+- [Midhun Mathew](https://github.com/your-username)
+- [Sidharth V Menon](https://github.com/team-member-1)
+- [Rohan Binu](https://github.com/team-member-2)
+- [Nobin Jo Jaime Jose](https://github.com/team-member-2)
