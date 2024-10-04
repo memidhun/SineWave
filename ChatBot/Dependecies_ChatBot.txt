@@ -1,0 +1,4 @@
+Dependencies for ChatBot.py:
+1. transformers
+2. huggingface-hub
+3. pyuac
