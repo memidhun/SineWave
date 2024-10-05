@@ -32,7 +32,7 @@ Follow these steps to set up the project:
    ```
 4. Run the project:
    ```bash
-   python main.py
+   python TestWeb.py
    ```
 
 ## Usage
