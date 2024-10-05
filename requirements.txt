@@ -1,0 +1,4 @@
+pyserial==3.5
+opencv-python==4.8.0.76
+streamlit==1.26.0
+tensorflow==2.15.0
