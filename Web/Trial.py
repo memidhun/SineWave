@@ -8,6 +8,12 @@ import time
 import os
 import random
 from transformers import pipeline, GPT2LMHeadModel, GPT2Tokenizer
+tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
+model = GPT2LMHeadModel.from_pretrained("gpt2")
+
+# Initialize chatbot pipeline using GPT-2
+generator = pipeline('text-generation', model=model, tokenizer=tokenizer)
+
 # Backend: Simulate automatic data fetching (replace with real IoT device data fetching logic)
 def fetch_device_status():
     # Simulated CSV data as a pandas DataFrame (replace with actual data source)
@@ -48,6 +54,8 @@ st.write("### Control Mode")
 mode = st.toggle("Manual Mode", key="control_mode")
 mode_name = "Manual" if mode else "Automatic"
 st.write(f"Current Mode: **{mode_name}**")
+
+# Utility function to handle command inputs for device control
 def control_device(command):
     command = command.lower()
     rooms = ["room 1", "room 2", "room 3", "room 4"]
@@ -64,6 +72,7 @@ def control_device(command):
                     else:
                         return f"Specify 'on' or 'off' to control the {device} in {room.capitalize()}."
     return "Sorry, I couldn't understand the command. Please specify the device and the room."
+
 
 if page == "Home":
     st.write("Welcome to Sentinel! Your intelligent all-in-one home monitoring and control system.")
@@ -134,170 +143,6 @@ if page == "Home":
         
         # Status bubble
         st.markdown(f"**Cleaning Robot Status:** {'🟢' if cleaning_robot_status == 'Active' else '🔴'} {cleaning_robot_status}")
-
-elif page == "Surveillance System":
-    st.subheader("Surveillance System")
-    st.write("View your home’s live surveillance feed and gas sensor status.")
-    
-    # Live feed placeholder (you can embed a camera feed here
-        
-
-    # Gas Sensor Data
-    gas_levels = st.slider("Gas Sensor Levels", 0, 100)
-    if gas_levels > 70:
-        st.error("Dangerous gas levels detected!")
-    # Load pre-trained data on face frontals from OpenCV (Haar cascade algorithm)
-    face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
-
-    # Function to trigger an alert
-        # Add your code to send an email, trigger an alarm, etc.
-    def trigger_alert_and_save(frame):
-    # Print the alert message
-        print("Intrusion Alert! Face Detected!")
-    
-    # Get the current time to name the photo uniquely
-        timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    
-    # Create a directory to save the photos if it doesn't exist
-        if not os.path.exists('intrusion_photos'):
-            os.makedirs('intrusion_photos')
-    
-    # Save the frame as a photo
-        file_name = f"intrusion_photos/intrusion_{timestamp}.jpg"
-        cv2.imwrite(file_name, frame)
-        print(f"Saved photo: {file_name}")
-    # Start video capture from the default camera (0)
-    last_detected_faces = []
-    last_photo_time = 0
-    photo_interval = 5 
-    cap = cv2.VideoCapture(0)
-    frame_placeholder = st.empty()
-    stop_button_pressed = st.button("Stop")
-    while True:
-        
-        # Read the current frame from the video capture
-        ret, frame = cap.read()
-
-        # Convert the frame to grayscale (Haar cascade requires grayscale)
-        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
-        # Detect faces in the frame
-        faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
-
-        # Process detected faces
-        current_faces = []
-
-        for idx, (x, y, w, h) in enumerate(faces):
-            current_faces.append((x, y, w, h))
-
-            # Draw a rectangle around the first face (normal detection)
-            if idx == 0:
-                cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)  # Blue box
-                cv2.putText(frame, f"Face detected at {datetime.datetime.now()}", (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 0, 0), 2)
-
-            # If a second face is detected, mark as intruder and use a red box
-            if idx == 1:
-                cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 0, 255), 2)  # Red box for intruder
-                cv2.putText(frame, "Intruder!", (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
-
-            # Check the time interval to control photo capture frequency
-            current_time = time.time()
-            if (x, y, w, h) not in last_detected_faces and (current_time - last_photo_time > photo_interval):
-                # Trigger intrusion alert and save the photo
-                trigger_alert_and_save(frame)
-                last_photo_time = current_time  # Update the last photo time
-
-        # Update the list of last detected faces
-            last_detected_faces = current_faces
-            frame_placeholder.image(frame,channels="RGB")
-            if cv2.waitKey(1) or 0xFF == ord("q") or stop_button_pressed:
-                break
-
-    # Release the capture and close windows
-    cap.release()
-    cv2.destroyAllWindows()
-
-    # Intruder Alert
-    st.write("#### Intruder Alert System")
-    intruder_status = st.radio("Intruder Status", ["Safe", "Alert"])
-    if trigger_flag==1:
-        st.warning("Intruder detected! Taking actions...")
-    
-elif page == "Pet Care System":
-    st.subheader("Automatic Pet Care System")
-    # Disable scientific notation for clarity
-    np.set_printoptions(suppress=True)
-
-    # Load the model
-    model = load_model(r"C:\\Users\\Lenovo\\AppData\\Local\\Microsoft\\WindowsApps\\SineWave\\Web\\keras_model.h5", compile=False)
-
-    # Load the labels
-    class_names = open(r"C:\\Users\\Lenovo\\AppData\\Local\\Microsoft\\WindowsApps\\SineWave\\Web\\labels.txt", "r").readlines()
-
-    # CAMERA can be 0 or 1 based on default camera of your computer
-    camera = cv2.VideoCapture(0)
-
-    # Increase resolution (adjust as needed)
-    camera.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
-    camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
-    frame_placeholder = st.empty()
-    stop_button_pressed = st.button("Stop")
-    while True:
-        # Grab the webcamera's image.
-        ret, image = camera.read()
-
-        # Resize the raw image into (224-height,224-width) pixels for the model
-        resized_image = cv2.resize(image, (224, 224), interpolation=cv2.INTER_AREA)
-
-        # Make the image a numpy array and reshape it to the models input shape.
-        input_image = np.asarray(resized_image, dtype=np.float32).reshape(1, 224, 224, 3)
-
-        # Normalize the image array
-        input_image = (input_image / 127.5) - 1
-
-        # Predicts the model
-        prediction = model.predict(input_image)
-        index = np.argmax(prediction)
-        class_name = class_names[index]
-        confidence_score = prediction[0][index]
-
-        # Determine box color and label based on prediction
-        if class_name.strip() == "0 dog":
-            box_color = (0, 0, 255)  # Red for dog
-            label = "DOG"
-        elif class_name.strip() == "1 rabbit":
-            box_color = (255, 255, 255)  # White for rabbit
-            label = "RABBIT"
-        else:
-            box_color = (0, 255, 0)  # Green for other
-            label = class_name.strip()
-
-        # Draw rectangle and put text
-        cv2.rectangle(image, (0, 0), (image.shape[1], image.shape[0]), box_color, 2)
-        cv2.putText(image, label, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, box_color, 2)
-
-        # Show the image in a window
-        cv2.imshow("Pet Detector", image)
-        frame_placeholder.image(image,channels="RGB")
-        # Print prediction and confidence score
-        print("Class:", class_name[2:], end="")
-        print("Confidence Score:", str(np.round(confidence_score * 100))[:-2], "%")
-        
-        # Listen to the keyboard for presses.
-        if cv2.waitKey(1) & 0xFF == ord('q')or stop_button_pressed:
-            break
-
-    camera.release()
-    cv2.destroyAllWindows()
-    # Dispense food and water
-    if st.button("Dispense Food"):
-        st.write("Dispensing food to your pet...")
-        
-    if st.button("Dispense Water"):
-        st.write("Dispensing water to your pet...")
-    
-    # Live feed from pet camera
-    st.image("pet_camera_placeholder.jpg", caption="Pet Camera Feed")
 
 elif page == "Chatbot":
     st.subheader("Smart Home Chatbot")
@@ -411,7 +256,3 @@ def chatbot_response(user_input, sensor_data):
         bot_reply += " WARNING: High gas levels detected! Take immediate action, ventilate the house, and ensure gas appliances are checked."
 
     return bot_reply
-
-
-
-                
