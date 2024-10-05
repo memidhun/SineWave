@@ -24,7 +24,7 @@ Follow these steps to set up the project:
    ```
 2. Navigate into the project directory:
    ```bash
-   cd sentinel
+   cd SineWave
    ```
 3. Install required dependencies:
    ```bash
