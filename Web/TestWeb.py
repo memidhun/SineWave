@@ -7,7 +7,40 @@ import numpy as np
 import time
 import os
 import random
+import threading
+import serial
+import tkinter as tk
 from transformers import pipeline, GPT2LMHeadModel, GPT2Tokenizer
+
+arduino = serial.Serial(port='COM4', baudrate=9600, timeout=1)
+
+# Function to toggle LED or Fan
+def toggle_device(device):
+    if device == '1':
+        arduino.write(b'1')  # Toggle LED
+    elif device == '2':
+        arduino.write(b'2')  # Toggle Fan
+
+# Function to read temperature and humidity from the Arduino
+def read_sensor_data():
+    while True:
+        if arduino.in_waiting > 0:
+            line = arduino.readline().decode('utf-8').strip()
+            sensor_data_text.insert(tk.END, line + "\n")
+            sensor_data_text.see(tk.END)  # Auto-scroll to the latest entry
+        time.sleep(2)
+
+# Function to start a background thread for reading sensor data
+def start_reading_thread():
+    threading.Thread(target=read_sensor_data, daemon=True).start()
+
+# Function for toggling LED via button press
+
+
+# Function for toggling Fan via button press
+def toggle_fan():
+    toggle_device('2')
+
 # Backend: Simulate automatic data fetching (replace with real IoT device data fetching logic)
 def fetch_device_status():
     # Simulated CSV data as a pandas DataFrame (replace with actual data source)
@@ -77,7 +110,10 @@ if page == "Home":
         st.write("#### Lights Control")
         room_lights = st.selectbox("Select Room for Lights", ["Room 1", "Room 2", "Room 3", "Room 4"], key="lights")
         light_status = device_status_df.loc[device_status_df['Room'] == room_lights, 'Lights'].values[0]
-        
+        if st.button('Toggle LED'):
+            toggle_device('1')
+        if st.button('Toggle Fan'):
+            toggle_device('2')
         if mode:
             if st.button(f"Toggle Lights in {room_lights}", key="lights_button"):
                 new_status = "Off" if light_status == "On" else "On"
